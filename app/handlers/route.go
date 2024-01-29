@@ -50,6 +50,7 @@ func (h *Handler) Init() *gin.Engine {
 			endpoint := v1.Group("client")
 			{
 				endpoint.POST("create", h.create)
+				endpoint.POST("login", h.login)
 			}
 		}
 	}
