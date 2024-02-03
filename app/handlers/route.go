@@ -47,10 +47,23 @@ func (h *Handler) Init() *gin.Engine {
 	{
 		v1 := hook.Group("v1")
 		{
-			endpoint := v1.Group("client")
+			endpoint := v1.Group("auth")
 			{
 				endpoint.POST("create", h.create)
+				endpoint.POST("login", h.login)
 			}
+
+			api := v1.Group("api", h.clientIdentity)
+			{
+				api.PUT("update", h.update)
+				api.GET("get-by-id", h.getById)
+			}
+
+			//course := v1.Group("course", h.clientIdentity)
+			//{
+			//	course.GET("get-all", h.getAll)
+			//	course.POST("enrollment", h.enrollment)
+			//}
 		}
 	}
 
