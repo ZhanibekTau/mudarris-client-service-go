@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"client-service-go/app/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
+	"user-service-go/app/utils"
 )
 
 const (
@@ -15,6 +15,17 @@ func (h *Handler) clientIdentity(c *gin.Context) {
 	headerParts := h.getAuthorizationHeader(c)
 
 	userId, err := utils.ParseClientToken(headerParts[1], h.appData)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "error while parsing token")
+	}
+
+	c.Set("userId", userId)
+}
+
+func (h *Handler) ustazIdentity(c *gin.Context) {
+	headerParts := h.getAuthorizationHeader(c)
+
+	userId, err := utils.ParseUstazToken(headerParts[1], h.appData)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, "error while parsing token")
 	}

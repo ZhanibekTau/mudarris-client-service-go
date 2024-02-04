@@ -1,20 +1,20 @@
 package main
 
 import (
-	"client-service-go/app/entityManager"
-	"client-service-go/app/handlers"
-	"client-service-go/app/repositories"
-	"client-service-go/app/services"
-	"client-service-go/config"
-	structures "client-service-go/config/configStruct"
-	gormSql "client-service-go/database/gorm"
-	"client-service-go/server"
 	"context"
 	"github.com/exgamer/go-rest-sdk/pkg/modules/j/jStructures"
 	"github.com/jinzhu/gorm"
 	"github.com/sirupsen/logrus"
 	"time"
 	_ "time/tzdata"
+	"user-service-go/app/entityManager"
+	"user-service-go/app/handlers"
+	"user-service-go/app/repositories"
+	"user-service-go/app/services"
+	"user-service-go/config"
+	structures "user-service-go/config/configStruct"
+	gormSql "user-service-go/database/gorm"
+	"user-service-go/server"
 )
 
 func init() {

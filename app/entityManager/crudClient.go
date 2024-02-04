@@ -1,6 +1,6 @@
 package entityManager
 
-import "client-service-go/model"
+import "user-service-go/model"
 
 func (m *Manager) Create(client *model.Client) (*model.Client, error) {
 	return m.services.IClientService.Create(client)

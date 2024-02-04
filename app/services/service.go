@@ -1,9 +1,9 @@
 package services
 
 import (
-	"client-service-go/app/repositories"
-	structures "client-service-go/config/configStruct"
-	"client-service-go/model"
+	"user-service-go/app/repositories"
+	structures "user-service-go/config/configStruct"
+	"user-service-go/model"
 )
 
 type IClientService interface {
@@ -15,12 +15,21 @@ type IClientService interface {
 	generateSessionToken(client *model.Client, appData *structures.AppData) (string, error)
 }
 
+type IUstazService interface {
+	Create(ustaz *model.Ustaz) (*model.Ustaz, error)
+	Login(email, password string, appData *structures.AppData) (*model.Ustaz, error)
+	Update(ustaz model.Ustaz) (*model.Ustaz, error)
+	GetById(id int) (*model.Ustaz, error)
+}
+
 type Service struct {
 	IClientService
+	IUstazService
 }
 
 func NewService(repos *repositories.Repository) *Service {
 	return &Service{
 		IClientService: NewClientService(repos.ClientRepo),
+		IUstazService:  NewUstazService(repos.UstazRepo),
 	}
 }

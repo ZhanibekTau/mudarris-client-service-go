@@ -1,11 +1,11 @@
 package gormSql
 
 import (
-	"client-service-go/model"
 	"fmt"
 	structures2 "github.com/exgamer/go-rest-sdk/pkg/config/structures"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"user-service-go/model"
 )
 
 type DBConfig struct {

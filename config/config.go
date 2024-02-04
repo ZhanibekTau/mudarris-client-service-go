@@ -1,11 +1,11 @@
 package config
 
 import (
-	structures "client-service-go/config/configStruct"
 	"github.com/davecgh/go-spew/spew"
 	structures2 "github.com/exgamer/go-rest-sdk/pkg/config/structures"
 	"github.com/exgamer/go-rest-sdk/pkg/helpers/config"
 	"log"
+	structures "user-service-go/config/configStruct"
 )
 
 func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.RedisConfig, *structures.RestConfig, *structures.TokenConfig, *structures.RabbitConfig, error) {

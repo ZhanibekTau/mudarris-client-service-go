@@ -1,4 +1,4 @@
-module client-service-go
+module user-service-go
 
 go 1.21
 

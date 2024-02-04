@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"client-service-go/model"
 	"github.com/jinzhu/gorm"
+	"user-service-go/model"
 )
 
 type ClientRepo interface {
@@ -12,12 +12,21 @@ type ClientRepo interface {
 	GetById(id int) (*model.Client, error)
 }
 
+type UstazRepo interface {
+	Create(ustaz *model.Ustaz) (*model.Ustaz, error)
+	GetUstaz(email, password string) (*model.Ustaz, error)
+	Update(ustaz model.Ustaz) (*model.Ustaz, error)
+	GetById(id int) (*model.Ustaz, error)
+}
+
 type Repository struct {
 	ClientRepo
+	UstazRepo
 }
 
 func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{
 		ClientRepo: NewClientRepository(db),
+		UstazRepo:  NewUstazRepository(db),
 	}
 }

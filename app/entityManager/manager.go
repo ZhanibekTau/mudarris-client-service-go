@@ -1,8 +1,8 @@
 package entityManager
 
 import (
-	"client-service-go/app/services"
-	structures "client-service-go/config/configStruct"
+	"user-service-go/app/services"
+	structures "user-service-go/config/configStruct"
 )
 
 type Manager struct {

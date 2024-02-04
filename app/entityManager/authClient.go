@@ -1,9 +1,9 @@
 package entityManager
 
 import (
-	"client-service-go/app/requests"
-	structures "client-service-go/config/configStruct"
-	"client-service-go/model"
+	"user-service-go/app/requests"
+	structures "user-service-go/config/configStruct"
+	"user-service-go/model"
 )
 
 func (m *Manager) Login(login requests.Login, appData *structures.AppData) (*model.Client, error) {

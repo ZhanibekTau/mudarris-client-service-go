@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"client-service-go/model"
 	"github.com/jinzhu/gorm"
+	"user-service-go/model"
 )
 
 type ClientRepository struct {

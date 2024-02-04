@@ -1,12 +1,12 @@
 package services
 
 import (
-	"client-service-go/app/repositories"
-	"client-service-go/app/utils"
-	structures "client-service-go/config/configStruct"
-	"client-service-go/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
+	"user-service-go/app/repositories"
+	"user-service-go/app/utils"
+	structures "user-service-go/config/configStruct"
+	"user-service-go/model"
 )
 
 type ClientService struct {
@@ -60,7 +60,7 @@ func (c *ClientService) generateSessionToken(client *model.Client, appData *stru
 			ExpiresAt: time.Now().Add(utils.TokenTTL).Unix(),
 			IssuedAt:  time.Now().Unix(),
 		},
-		ClientId: client.Id,
+		UserId: client.Id,
 	})
 
 	return token.SignedString([]byte(appData.TokenConfig.ApiSecretClient))
