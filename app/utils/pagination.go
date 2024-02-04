@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"client-service-go/model"
 	"net/http"
 	"strconv"
+	"user-service-go/model"
 )
 
 // GeneratePaginationFromRequest ..

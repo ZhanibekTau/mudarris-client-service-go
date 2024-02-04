@@ -1,11 +1,11 @@
 package gormSql
 
 import (
-	"client-service-go/model"
 	"fmt"
 	structures2 "github.com/exgamer/go-rest-sdk/pkg/config/structures"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"user-service-go/model"
 )
 
 type DBConfig struct {
@@ -41,7 +41,7 @@ func NewGormSqlDB(dbConfig *structures2.DbConfig) (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	Database.AutoMigrate(model.User{})
+	Database.AutoMigrate(model.Client{})
 
 	return Database, nil
 }

@@ -1,39 +1,50 @@
 package handlers
 
 import (
-	"client-service-go/app/utils"
-	logger "client-service-go/internal"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
+	"user-service-go/app/utils"
 )
 
 const (
 	authorizationHeader = "Authorization"
 )
 
-func UserIdentity(c *gin.Context) {
-	log := &logger.Log{}
+func (h *Handler) clientIdentity(c *gin.Context) {
+	headerParts := h.getAuthorizationHeader(c)
 
-	header := c.GetHeader(authorizationHeader)
-	if header == "" {
-		log.Error("empty auth header", http.StatusUnauthorized)
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "empty auth header")
-		return
-	}
-
-	headerParts := strings.Split(header, " ")
-	if len(headerParts) != 2 {
-		log.Error("Invalid auth header", http.StatusUnauthorized)
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid auth header")
-		return
-	}
-
-	userId, err := utils.ParseToken(headerParts[1])
+	userId, err := utils.ParseClientToken(headerParts[1], h.appData)
 	if err != nil {
-		log.Error("error while parsing token", err.Error())
 		c.AbortWithStatusJSON(http.StatusUnauthorized, "error while parsing token")
 	}
 
 	c.Set("userId", userId)
+}
+
+func (h *Handler) ustazIdentity(c *gin.Context) {
+	headerParts := h.getAuthorizationHeader(c)
+
+	userId, err := utils.ParseUstazToken(headerParts[1], h.appData)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "error while parsing token")
+	}
+
+	c.Set("userId", userId)
+}
+
+func (h *Handler) getAuthorizationHeader(c *gin.Context) []string {
+	header := c.GetHeader(authorizationHeader)
+	if header == "" {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "empty auth header")
+		return []string{""}
+	}
+
+	headerParts := strings.Split(header, " ")
+	if len(headerParts) != 2 {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid auth header")
+		return []string{""}
+	}
+
+	return headerParts
 }

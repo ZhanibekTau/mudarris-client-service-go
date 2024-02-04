@@ -1,10 +1,10 @@
 package environment
 
 import (
-	gormSql "client-service-go/database/gorm"
 	"fmt"
 	"os"
 	"strconv"
+	gormSql "user-service-go/database/gorm"
 )
 
 func GetDbConfigWithEnvs() (*gormSql.DBConfig, error) {

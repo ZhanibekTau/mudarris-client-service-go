@@ -1,14 +1,14 @@
 package handlers
 
 import (
-	"client-service-go/app/entityManager"
-	structures "client-service-go/config/configStruct"
 	ginhelper "github.com/exgamer/go-rest-sdk/pkg/helpers/gin"
 	"github.com/gin-gonic/gin"
 	_ "github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"net/http"
+	"user-service-go/app/entityManager"
+	structures "user-service-go/config/configStruct"
 )
 
 type Handler struct {
@@ -43,15 +43,43 @@ func (h *Handler) Init() *gin.Engine {
 		healthRouter.GET("ready", healthcheck)
 	}
 
-	hook := router.Group("client-service-go")
+	hook := router.Group("user-service-go")
 	{
 		v1 := hook.Group("v1")
 		{
-			endpoint := v1.Group("client")
+			authClient := v1.Group("client")
 			{
-				endpoint.POST("create", h.create)
-				endpoint.POST("login", h.login)
+				endpoint := authClient.Group("auth")
+				{
+					endpoint.POST("create", h.create)
+					endpoint.POST("login", h.login)
+				}
+				api := authClient.Group("api", h.clientIdentity)
+				{
+					api.PUT("update", h.update)
+					api.GET("get-by-id", h.getById)
+				}
 			}
+
+			authUstaz := v1.Group("ustaz")
+			{
+				endpointUstaz := authUstaz.Group("auth")
+				{
+					endpointUstaz.POST("create", h.createUstaz)
+					endpointUstaz.POST("login", h.loginUstaz)
+				}
+				apiUstaz := authUstaz.Group("api", h.ustazIdentity)
+				{
+					apiUstaz.PUT("update", h.updateUstaz)
+					apiUstaz.GET("get-by-id", h.getByIdUstaz)
+				}
+			}
+
+			//course := v1.Group("course", h.clientIdentity)
+			//{
+			//	course.GET("get-all", h.getAll)
+			//	course.POST("enrollment", h.enrollment)
+			//}
 		}
 	}
 

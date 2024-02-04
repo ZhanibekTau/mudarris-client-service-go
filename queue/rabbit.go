@@ -1,9 +1,9 @@
 package queue
 
 import (
-	structures "client-service-go/config/configStruct"
 	"github.com/davecgh/go-spew/spew"
 	"github.com/streadway/amqp"
+	structures "user-service-go/config/configStruct"
 )
 
 func ConnectionToRabbit(appData *structures.AppData) (*amqp.Connection, error) {
@@ -24,7 +24,7 @@ func MakeChannel(connection *amqp.Connection) (*amqp.Channel, error) {
 	}
 
 	_, err = ch.QueueDeclare(
-		"client-service-go.store-service.queue.for.stop.list",
+		"user-service-go.store-service.queue.for.stop.list",
 		true,
 		false,
 		false,
@@ -35,7 +35,7 @@ func MakeChannel(connection *amqp.Connection) (*amqp.Channel, error) {
 	}
 
 	_, err = ch.QueueDeclare(
-		"client-service-go.order-service.queue.for.order.status.update",
+		"user-service-go.order-service.queue.for.order.status.update",
 		true,
 		false,
 		false,
