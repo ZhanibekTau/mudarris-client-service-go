@@ -43,8 +43,6 @@ func (h *Handler) login(c *gin.Context) {
 		"client_id": client.Id,
 		"token":     client.Token,
 	})
-
-	c.JSON(http.StatusOK, gin.H{"message": input})
 }
 
 func (h *Handler) update(c *gin.Context) {
