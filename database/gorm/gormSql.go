@@ -41,7 +41,7 @@ func NewGormSqlDB(dbConfig *structures2.DbConfig) (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	Database.AutoMigrate(model.Client{})
+	Database.AutoMigrate(model.Client{}, model.Ustaz{})
 
 	return Database, nil
 }
