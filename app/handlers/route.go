@@ -58,6 +58,7 @@ func (h *Handler) Init() *gin.Engine {
 				{
 					api.PUT("update", h.update)
 					api.GET("get-by-id", h.getById)
+					api.GET("get-ustaz-by-id", h.getByIdUstaz)
 				}
 			}
 
