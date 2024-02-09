@@ -81,5 +81,6 @@ func (h *Handler) getById(c *gin.Context) {
 		"name":     client.Name,
 		"lastname": client.Lastname,
 		"email":    client.Email,
+		"phone":    client.Phone,
 	})
 }
