@@ -29,7 +29,7 @@ func init() {
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
-	appConfig, dbConfig, redisConfig, restConfig, tokenConfig, rabbitConfig, err := config.InitConfig()
+	appConfig, dbConfig, redisConfig, restConfig, tokenConfig, rabbitConfig, telegramConfig, err := config.InitConfig()
 	if err != nil {
 		logrus.Fatalf("error database connection: %v", err.Error())
 	}
@@ -42,8 +42,9 @@ func main() {
 		RequestData: &jStructures.RequestData{
 			ServiceName: appConfig.Name,
 		},
-		TokenConfig:  tokenConfig,
-		RabbitConfig: rabbitConfig,
+		TokenConfig:    tokenConfig,
+		RabbitConfig:   rabbitConfig,
+		TelegramConfig: telegramConfig,
 	}
 
 	db, err := gormSql.NewGormSqlDB(dbConfig)

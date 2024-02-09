@@ -8,7 +8,7 @@ import (
 	structures "user-service-go/config/configStruct"
 )
 
-func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.RedisConfig, *structures.RestConfig, *structures.TokenConfig, *structures.RabbitConfig, error) {
+func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.RedisConfig, *structures.RestConfig, *structures.TokenConfig, *structures.RabbitConfig, *structures.TelegramConfig, error) {
 	appConfig, dbConfig, err := config.InitBaseConfig()
 	if err != nil {
 		log.Fatalf("Some error occurred. Err: %s", err)
@@ -54,13 +54,24 @@ func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.R
 		log.Fatalf("Cannot init rest config. Err: %s", ok)
 	}
 
+	telegramConfigInterface, rErr := config.InitConfig(&structures.TelegramConfig{})
+	if rErr != nil {
+		log.Fatalf("Some error occurred. Err: %s", rErr)
+	}
+
+	telegramConfig, ok := telegramConfigInterface.(*structures.TelegramConfig)
+	if !ok {
+		log.Fatalf("Cannot init rest config. Err: %s", ok)
+	}
+
 	if appConfig.AppEnv != "prod" {
 		spew.Dump(appConfig)
 		spew.Dump(dbConfig)
 		spew.Dump(restConfig)
 		spew.Dump(tokenConfig)
 		spew.Dump(rabbitConfig)
+		spew.Dump(telegramConfig)
 	}
 
-	return appConfig, dbConfig, redisConfig, restConfig, tokenConfig, rabbitConfig, nil
+	return appConfig, dbConfig, redisConfig, restConfig, tokenConfig, rabbitConfig, telegramConfig, nil
 }

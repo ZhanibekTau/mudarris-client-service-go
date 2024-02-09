@@ -66,11 +66,12 @@ func (h *Handler) Init() *gin.Engine {
 			{
 				endpointUstaz := authUstaz.Group("auth")
 				{
-					endpointUstaz.POST("create", h.createUstaz)
 					endpointUstaz.POST("login", h.loginUstaz)
+					endpointUstaz.POST("request-for-create", h.requestForCreate)
 				}
 				apiUstaz := authUstaz.Group("api", h.ustazIdentity)
 				{
+					apiUstaz.POST("create", h.createUstaz)
 					apiUstaz.PUT("update", h.updateUstaz)
 					apiUstaz.GET("get-by-id", h.getByIdUstaz)
 				}

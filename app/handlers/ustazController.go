@@ -87,3 +87,19 @@ func (h *Handler) getByIdUstaz(c *gin.Context) {
 		"experience":   ustaz.Experience,
 	})
 }
+
+func (h *Handler) requestForCreate(c *gin.Context) {
+	var input model.Ustaz
+	if err := c.BindJSON(&input); err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err := h.manager.RequestForCreate(&input, h.appData)
+	if err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "request was sent successfully"})
+}
