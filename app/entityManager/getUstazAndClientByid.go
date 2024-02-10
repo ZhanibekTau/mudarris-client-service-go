@@ -1,17 +1,28 @@
 package entityManager
 
 import (
+	"strconv"
 	"user-service-go/app/requests"
 	"user-service-go/app/responses"
 )
 
 func (m *Manager) GetUstazAndClientById(payload requests.ClientAndUstazId) (*responses.ClientAndUstaz, error) {
-	ustaz, err := m.services.IUstazService.GetById(payload.UstazId)
+	ustazId, err := strconv.Atoi(payload.UstazId)
 	if err != nil {
 		return nil, err
 	}
 
-	client, err := m.services.IClientService.GetById(payload.ClientId)
+	clientId, err := strconv.Atoi(payload.ClientId)
+	if err != nil {
+		return nil, err
+	}
+
+	ustaz, err := m.services.IUstazService.GetById(ustazId)
+	if err != nil {
+		return nil, err
+	}
+
+	client, err := m.services.IClientService.GetById(clientId)
 	if err != nil {
 		return nil, err
 	}

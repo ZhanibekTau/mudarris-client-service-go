@@ -6,6 +6,6 @@ type Login struct {
 }
 
 type ClientAndUstazId struct {
-	ClientId int `json:"client_id"`
-	UstazId  int `json:"ustaz_id"`
+	ClientId string `json:"client_id"`
+	UstazId  string `json:"ustaz_id"`
 }
