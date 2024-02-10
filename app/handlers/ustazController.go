@@ -103,3 +103,19 @@ func (h *Handler) requestForCreate(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "request was sent successfully"})
 }
+
+func (h *Handler) getByIdUstazAndUstaz(c *gin.Context) {
+	var input requestsForm.ClientAndUstazId
+	if err := c.BindJSON(&input); err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	result, err := h.manager.GetUstazAndClientById(input)
+	if err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, result)
+}
