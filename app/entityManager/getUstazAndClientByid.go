@@ -39,6 +39,7 @@ func (m *Manager) GetUstazAndClientById(payload requests.ClientAndUstazId) (*res
 	}
 
 	clientStruct := responses.ClientStruct{
+		Id:       client.Id,
 		Name:     client.Name,
 		Lastname: client.Lastname,
 		Email:    client.Email,

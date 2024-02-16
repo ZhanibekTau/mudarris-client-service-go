@@ -119,3 +119,19 @@ func (h *Handler) getByIdUstazAndUstaz(c *gin.Context) {
 
 	c.JSON(http.StatusOK, result)
 }
+
+func (h *Handler) getClientsByIds(c *gin.Context) {
+	var input requestsForm.ClientIds
+	if err := c.BindJSON(&input); err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	result, err := h.manager.GetClientsByIds(input.Ids)
+	if err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, result)
+}

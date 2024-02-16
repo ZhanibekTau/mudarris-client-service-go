@@ -13,6 +13,7 @@ type IClientService interface {
 	GetById(id int) (*model.Client, error)
 	ValidateUser(client *model.Client, appData *structures.AppData) (string, error)
 	generateSessionToken(client *model.Client, appData *structures.AppData) (string, error)
+	GetClientsByIds(ids []int) (*[]model.Client, error)
 }
 
 type IUstazService interface {

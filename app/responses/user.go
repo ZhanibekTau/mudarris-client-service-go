@@ -17,6 +17,7 @@ type UstazStruct struct {
 }
 
 type ClientStruct struct {
+	Id       int    `json:"id"`
 	Name     string `json:"name"`
 	Lastname string `json:"lastname"`
 	Email    string `json:"email"`

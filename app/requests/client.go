@@ -9,3 +9,6 @@ type ClientAndUstazId struct {
 	ClientId string `json:"client_id"`
 	UstazId  string `json:"ustaz_id"`
 }
+type ClientIds struct {
+	Ids []int `json:"client_ids"`
+}

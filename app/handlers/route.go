@@ -75,6 +75,7 @@ func (h *Handler) Init() *gin.Engine {
 					apiUstaz.POST("create", h.createUstaz)
 					apiUstaz.PUT("update", h.updateUstaz)
 					apiUstaz.GET("get-by-id", h.getByIdUstaz)
+					apiUstaz.POST("get-clients-by-ids", h.getClientsByIds)
 				}
 			}
 

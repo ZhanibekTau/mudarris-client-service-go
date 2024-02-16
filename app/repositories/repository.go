@@ -10,6 +10,7 @@ type ClientRepo interface {
 	GetClient(email, password string) (*model.Client, error)
 	Update(client model.Client) (*model.Client, error)
 	GetById(id int) (*model.Client, error)
+	GetClientsByIds(ids []int) (*[]model.Client, error)
 }
 
 type UstazRepo interface {

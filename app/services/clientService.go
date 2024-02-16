@@ -45,6 +45,10 @@ func (c *ClientService) GetById(id int) (*model.Client, error) {
 	return c.repo.GetById(id)
 }
 
+func (c *ClientService) GetClientsByIds(ids []int) (*[]model.Client, error) {
+	return c.repo.GetClientsByIds(ids)
+}
+
 func (c *ClientService) ValidateUser(client *model.Client, appData *structures.AppData) (string, error) {
 	token, err := c.generateSessionToken(client, appData)
 	if err != nil {
