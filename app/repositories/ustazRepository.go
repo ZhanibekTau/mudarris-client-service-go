@@ -50,3 +50,13 @@ func (u *UstazRepository) GetById(id int) (*model.Ustaz, error) {
 
 	return &ustaz, nil
 }
+
+func (u *UstazRepository) GetByEmail(email string) (*model.Ustaz, error) {
+	var ustaz model.Ustaz
+	result := u.db.Model(&model.Ustaz{}).Where("email=  ?", email).Find(&ustaz)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &ustaz, nil
+}

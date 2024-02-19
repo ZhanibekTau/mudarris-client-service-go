@@ -14,6 +14,7 @@ type IClientService interface {
 	ValidateUser(client *model.Client, appData *structures.AppData) (string, error)
 	generateSessionToken(client *model.Client, appData *structures.AppData) (string, error)
 	GetClientsByIds(ids []int) (*[]model.Client, error)
+	GetByEmail(email string) (*model.Client, error)
 }
 
 type IUstazService interface {
@@ -21,16 +22,23 @@ type IUstazService interface {
 	Login(email, password string, appData *structures.AppData) (*model.Ustaz, error)
 	Update(ustaz model.Ustaz) (*model.Ustaz, error)
 	GetById(id int) (*model.Ustaz, error)
+	GetByEmail(email string) (*model.Ustaz, error)
+}
+
+type IEmailService interface {
+	SendEmail(to, subject, body string, appData *structures.AppData) error
 }
 
 type Service struct {
 	IClientService
 	IUstazService
+	IEmailService
 }
 
 func NewService(repos *repositories.Repository) *Service {
 	return &Service{
 		IClientService: NewClientService(repos.ClientRepo),
 		IUstazService:  NewUstazService(repos.UstazRepo),
+		IEmailService:  NewEmailService(repos.EmailRepo),
 	}
 }

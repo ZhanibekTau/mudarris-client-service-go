@@ -65,3 +65,7 @@ func (u *UstazService) generateSessionToken(ustaz *model.Ustaz, appData *structu
 
 	return token.SignedString([]byte(appData.TokenConfig.ApiSecretUstaz))
 }
+
+func (u *UstazService) GetByEmail(email string) (*model.Ustaz, error) {
+	return u.repo.GetByEmail(email)
+}

@@ -79,6 +79,11 @@ func (h *Handler) Init() *gin.Engine {
 				}
 			}
 
+			auth := v1.Group("auth")
+			{
+				auth.POST("forgot-password", h.forgotPassword)
+			}
+
 			//course := v1.Group("course", h.clientIdentity)
 			//{
 			//	course.GET("get-all", h.getAll)

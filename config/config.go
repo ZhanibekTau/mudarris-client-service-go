@@ -8,7 +8,7 @@ import (
 	structures "user-service-go/config/configStruct"
 )
 
-func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.RedisConfig, *structures.RestConfig, *structures.TokenConfig, *structures.RabbitConfig, *structures.TelegramConfig, error) {
+func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.RedisConfig, *structures.RestConfig, *structures.TokenConfig, *structures.RabbitConfig, *structures.TelegramConfig, *structures.EmailConfig, error) {
 	appConfig, dbConfig, err := config.InitBaseConfig()
 	if err != nil {
 		log.Fatalf("Some error occurred. Err: %s", err)
@@ -64,6 +64,16 @@ func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.R
 		log.Fatalf("Cannot init rest config. Err: %s", ok)
 	}
 
+	emailConfigInterface, rErr := config.InitConfig(&structures.EmailConfig{})
+	if rErr != nil {
+		log.Fatalf("Some error occurred. Err: %s", rErr)
+	}
+
+	emailConfig, ok := emailConfigInterface.(*structures.EmailConfig)
+	if !ok {
+		log.Fatalf("Cannot init rest config. Err: %s", ok)
+	}
+
 	if appConfig.AppEnv != "prod" {
 		spew.Dump(appConfig)
 		spew.Dump(dbConfig)
@@ -71,7 +81,8 @@ func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.R
 		spew.Dump(tokenConfig)
 		spew.Dump(rabbitConfig)
 		spew.Dump(telegramConfig)
+		spew.Dump(emailConfig)
 	}
 
-	return appConfig, dbConfig, redisConfig, restConfig, tokenConfig, rabbitConfig, telegramConfig, nil
+	return appConfig, dbConfig, redisConfig, restConfig, tokenConfig, rabbitConfig, telegramConfig, emailConfig, nil
 }

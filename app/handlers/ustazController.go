@@ -135,3 +135,19 @@ func (h *Handler) getClientsByIds(c *gin.Context) {
 
 	c.JSON(http.StatusOK, result)
 }
+
+func (h *Handler) forgotPassword(c *gin.Context) {
+	var input requestsForm.ForgotPassword
+	if err := c.BindJSON(&input); err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err := h.manager.ForgotPassword(input, h.appData)
+	if err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, "password was sent successfully")
+}

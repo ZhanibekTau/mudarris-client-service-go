@@ -60,3 +60,13 @@ func (c *ClientRepository) GetClientsByIds(ids []int) (*[]model.Client, error) {
 
 	return &client, nil
 }
+
+func (c *ClientRepository) GetByEmail(email string) (*model.Client, error) {
+	var client model.Client
+	result := c.db.Model(&model.Client{}).Where("email = ?", email).Find(&client)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &client, nil
+}

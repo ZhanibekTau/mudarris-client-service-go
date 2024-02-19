@@ -58,6 +58,10 @@ func (c *ClientService) ValidateUser(client *model.Client, appData *structures.A
 	return token, nil
 }
 
+func (c *ClientService) GetByEmail(email string) (*model.Client, error) {
+	return c.repo.GetByEmail(email)
+}
+
 func (c *ClientService) generateSessionToken(client *model.Client, appData *structures.AppData) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &utils.TokenClaims{
 		StandardClaims: jwt.StandardClaims{

@@ -9,6 +9,12 @@ type ClientAndUstazId struct {
 	ClientId string `json:"client_id"`
 	UstazId  string `json:"ustaz_id"`
 }
+
 type ClientIds struct {
 	Ids []int `json:"client_ids"`
+}
+
+type ForgotPassword struct {
+	Email      string `json:"email"`
+	TypeOfUser string `json:"type_of_user"`
 }

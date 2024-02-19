@@ -14,4 +14,5 @@ type AppData struct {
 	TokenConfig    *TokenConfig
 	RabbitConfig   *RabbitConfig
 	TelegramConfig *TelegramConfig
+	EmailConfig    *EmailConfig
 }
