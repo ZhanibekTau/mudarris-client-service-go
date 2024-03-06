@@ -84,3 +84,12 @@ func (h *Handler) getById(c *gin.Context) {
 		"phone":    client.Phone,
 	})
 }
+
+func (h *Handler) getAllClientsIds(c *gin.Context) {
+	clientids, err := h.manager.GetAllClientsIds()
+	if err != nil {
+		errorResponse.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, clientids)
+}

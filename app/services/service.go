@@ -14,6 +14,7 @@ type IClientService interface {
 	ValidateUser(client *model.Client, appData *structures.AppData) (string, error)
 	generateSessionToken(client *model.Client, appData *structures.AppData) (string, error)
 	GetClientsByIds(ids []int) (*[]model.Client, error)
+	GetAllClientsIds() ([]int, error)
 	GetByEmail(email string) (*model.Client, error)
 }
 

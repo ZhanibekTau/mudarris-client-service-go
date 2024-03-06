@@ -70,3 +70,19 @@ func (c *ClientRepository) GetByEmail(email string) (*model.Client, error) {
 
 	return &client, nil
 }
+
+func (c *ClientRepository) GetAllClientsIds() ([]int, error) {
+	var clients []model.Client
+	var clientIds []int
+
+	result := c.db.Model(&model.Client{}).Find(&clients)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	for _, client := range clients {
+		clientIds = append(clientIds, client.Id)
+	}
+
+	return clientIds, nil
+}

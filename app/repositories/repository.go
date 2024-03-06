@@ -13,6 +13,7 @@ type ClientRepo interface {
 	GetById(id int) (*model.Client, error)
 	GetClientsByIds(ids []int) (*[]model.Client, error)
 	GetByEmail(email string) (*model.Client, error)
+	GetAllClientsIds() ([]int, error)
 }
 
 type UstazRepo interface {

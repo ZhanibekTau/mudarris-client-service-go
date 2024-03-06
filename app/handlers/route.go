@@ -73,6 +73,7 @@ func (h *Handler) Init() *gin.Engine {
 				apiUstaz := authUstaz.Group("api", h.ustazIdentity)
 				{
 					apiUstaz.POST("create", h.createUstaz)
+					apiUstaz.GET("get-all-clients-ids", h.getAllClientsIds)
 					apiUstaz.PUT("update", h.updateUstaz)
 					apiUstaz.GET("get-by-id", h.getByIdUstaz)
 					apiUstaz.POST("get-clients-by-ids", h.getClientsByIds)

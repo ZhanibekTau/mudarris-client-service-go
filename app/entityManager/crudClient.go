@@ -17,6 +17,10 @@ func (m *Manager) GetById(id int) (*model.Client, error) {
 	return m.services.IClientService.GetById(id)
 }
 
+func (m *Manager) GetAllClientsIds() ([]int, error) {
+	return m.services.IClientService.GetAllClientsIds()
+}
+
 func (m *Manager) GetClientsByIds(ids []int) (*[]responses.ClientStruct, error) {
 	clients, err := m.services.IClientService.GetClientsByIds(ids)
 	if err != nil {
