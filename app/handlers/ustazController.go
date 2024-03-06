@@ -78,13 +78,14 @@ func (h *Handler) getByIdUstaz(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"name":         ustaz.Name,
-		"lastname":     ustaz.Lastname,
-		"phone":        ustaz.Phone,
-		"degree":       ustaz.Degree,
-		"university":   ustaz.University,
-		"personalInfo": ustaz.AdditionalInfo,
-		"experience":   ustaz.Experience,
+		"name":              ustaz.Name,
+		"lastname":          ustaz.Lastname,
+		"phone":             ustaz.Phone,
+		"degree":            ustaz.Degree,
+		"university":        ustaz.University,
+		"personalInfo":      ustaz.AdditionalInfo,
+		"experience":        ustaz.Experience,
+		"links_for_diploma": ustaz.LinksForDiploma,
 	})
 }
 
