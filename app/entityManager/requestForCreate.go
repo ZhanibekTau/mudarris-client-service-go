@@ -17,8 +17,8 @@ func (m *Manager) RequestForCreate(ustaz *model.Ustaz, appData *structures.AppDa
 	var text string
 
 	text = fmt.Sprintf(
-		"Запрос на регистрацию!\n\n\nИмя: %s\nФамилия: %s\nТелефон: %s\nПочта: %s\nУровень образования: %s\nУниверситет: %s\nОпыт(в годах): %.f\nДоп. информация: %s",
-		ustaz.Name, ustaz.Lastname, ustaz.Phone, ustaz.Email, ustaz.Degree, ustaz.University, ustaz.Experience, ustaz.AdditionalInfo)
+		"Запрос на регистрацию!\n\n\nИмя: %s\nФамилия: %s\nТелефон: %s\nПочта: %s\nУровень образования: %s\nУниверситет: %s\nОпыт(в годах): %.f\nДоп. информация: %s\nСсылка на диплом: %s",
+		ustaz.Name, ustaz.Lastname, ustaz.Phone, ustaz.Email, ustaz.Degree, ustaz.University, ustaz.Experience, ustaz.AdditionalInfo, ustaz.LinksForDiploma)
 
 	chatId, err := strconv.ParseInt(appData.TelegramConfig.TelegramChatId, 10, 64)
 	if err != nil {
